@@ -81,7 +81,7 @@ module.exports = function openssl(params, options = { dir: '' }) {
         });
 
         openSSLProcess.on('close', (code) => {
-            if (stderr.length > 0) {
+            if (code !== 0) {
                 return reject(new Error(Buffer.concat(stderr)).toString())
             }
             return resolve(Buffer.concat(stdout));
